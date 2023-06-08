@@ -10,3 +10,19 @@ class TestGuest(unittest.TestCase):
 
     def test_guest_has_wallet(self):
         self.assertEqual(1000, self.guest.wallet)
+
+    def test_guest_has_cash__True(self):
+        result = self.guest.has_cash(10)
+        self.assertTrue(result)
+
+    def test_guest_has_cash__False(self):
+        result = self.guest.has_cash(5000)
+        self.assertFalse(result)
+
+    def test_remove_cash__successful(self):
+        self.guest.remove_cash(10)
+        self.assertEqual(990, self.guest.wallet)
+
+    def test_remove_cash__unsuccessful(self):
+        self.guest.remove_cash(10000)
+        self.assertEqual(1000, self.guest.wallet)

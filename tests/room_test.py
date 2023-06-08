@@ -5,15 +5,20 @@ from src.song import Song
 
 class TestRoom(unittest.TestCase):
     def setUp(self):
-        self.room = Room("Disco Beats")
+        self.room = Room("Disco Beats", 1)
+        self.room1 = Room("Tachno Groove", 0)
         self.guest = Guest("Greg", 1000)
         self.song = Song("Dancing Queen", "Abba", "Euro-Pop")
 
     def test_room_has_name(self):
         self.assertEqual("Disco Beats", self.room.name)
 
+    def test_room_has_limit(self):
+        self.assertEqual(1, self.room.room_limit)
+
     def test_room_has_empty_song_list(self):
         self.assertEqual(0, len(self.room.song_list))
+
 
     def test_can_add_song(self):
         self.room.add_song(self.song)
@@ -30,3 +35,8 @@ class TestRoom(unittest.TestCase):
         self.room.add_guest(self.guest)
         self.room.remove_guest(self.guest)
         self.assertEqual(0, len(self.room.guest_list))
+
+    def test_add_guest__full_room(self):
+        self.room1.add_guest(self.guest)
+        self.assertEqual(0, len(self.room1.guest_list))
+

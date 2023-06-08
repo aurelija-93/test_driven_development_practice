@@ -1,11 +1,16 @@
 class Room:
-    def __init__(self, name):
+    def __init__(self, name, room_limit):
         self.name = name
+        self.room_limit = room_limit
         self.song_list = []
         self.guest_list = []
 
+    def check_room_has_space(self):
+        return self.room_limit > 0
+
     def add_guest(self, guest):
-        self.guest_list.append(guest)
+        if self.check_room_has_space():
+            self.guest_list.append(guest)
 
     def remove_guest(self, guest):
         self.guest_list.remove(guest)
