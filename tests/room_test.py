@@ -7,7 +7,8 @@ class TestRoom(unittest.TestCase):
     def setUp(self):
         self.room = Room("Disco Beats", 1)
         self.room1 = Room("Tachno Groove", 0)
-        self.guest = Guest("Greg", 1000)
+        self.guest = Guest("Greg", 1000, "Dancing Queen")
+        self.guest1 = Guest("Tracy", 500, "Bohemian Rhapsody")
         self.song = Song("Dancing Queen", "Abba", "Euro-Pop")
 
     def test_room_has_name(self):
@@ -40,3 +41,12 @@ class TestRoom(unittest.TestCase):
         self.room1.add_guest(self.guest)
         self.assertEqual(0, len(self.room1.guest_list))
 
+    def test_room_has_favourite_song__returns_whoo(self):
+        self.room.add_song(self.song)
+        result = self.room.check_for_favourite_song(self.guest)
+        self.assertEqual("Whoo!", result)
+
+    def test_room_has_favourite_song__returns_boo(self):
+        self.room.add_song(self.song)
+        result = self.room.check_for_favourite_song(self.guest1)
+        self.assertEqual("Boo!", result)

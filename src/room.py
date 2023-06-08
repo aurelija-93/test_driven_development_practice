@@ -17,3 +17,9 @@ class Room:
 
     def add_song(self, song):
         self.song_list.append(song)
+
+    def check_for_favourite_song(self, guest):
+        for song in self.song_list:
+            if song.name == guest.favourite_song:
+                return guest.whoo()
+        return guest.boo()
